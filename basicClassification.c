@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "NumClass.h"
 #include "math.h"
 
@@ -14,7 +13,7 @@ int isStrong(int num){
     for (int i = num ; i > 0 ; i = i/10){
         sum = sum + factorial(num%10);
     }
-    if (sum = num)
+    if (sum == num)
         return 1;
     else
         return 0;

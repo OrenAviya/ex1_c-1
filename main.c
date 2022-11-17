@@ -1,8 +1,12 @@
 #include <stdio.h>
 #include "NumClass.h"
+#include "math.h"
 
 int main() {
-    int start, end;
+    int start;
+    int end;
+    printf("please enter two integer numbers. \n");
+    scanf("%d %d", &start ,&end);
     int primes [end - start + 1];
     int armstrongs [end  - start + 1];
     int palindromes[end - start + 1 ];
@@ -11,9 +15,7 @@ int main() {
     int armstrongsInx = 0;
     int palindromesInx = 0;
     int strongsInx = 0;
-    printf("please enter two integer numbers. \n");
-    scanf("%d %d", &start &end);
-    for(i = start; i <= end )
+    for(int i = start; i <= end;)
     {
         if (isStrong(i) == 1) {
             strongs[strongsInx] = i;

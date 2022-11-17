@@ -2,6 +2,7 @@ all: maindrec maindloop loops mains
 
 clean:
 	rm -rf *.o
+	rm -rf *.so
 
 mains: main.c recursives
 	gcc main.c -L. -lclassrec -o mains
@@ -19,7 +20,7 @@ recursives:advancedClassificationRecursion.o basicClassification.o
 	ar -rc libclassrec.a advancedClassificationRecursionPIC.o basicClassification.o
 
 recursived:basicClassificationPIC.o advancedClassificationRecursionPIC.o
-	gcc -shared-Wall, basicClassificationPIC.o advancedClassificationRecursionPIC.o  -o libclassrec.so
+	gcc -shared -Wall basicClassificationPIC.o advancedClassificationRecursionPIC.o  -o libclassrec.so
 	export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
 loopd:advancedClassificationLoopPIC.o basicClassificationPIC.o
@@ -42,4 +43,4 @@ advancedClassificationRecursionPIC.o:advancedClassificationRecursion.c NumClass.
 	gcc -c -Wall -Werror -fpic advancedClassificationRecursion.c -o advancedClassificationRecursionPIC.o
 
 advancedClassificationLoopPIC.o:advancedClassificationLoop.c NumClass.h
-	gcc -c -Wall -Werror-fpic dvancedClassificationLoop.c -o advancedClassificationLoopPIC.o
+	gcc -c -Wall -Werror -fpic advancedClassificationLoop.c -o advancedClassificationLoopPIC.o

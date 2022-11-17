@@ -7,10 +7,8 @@ int length (int x){
 }
 
 /* will return if a number is Armstrong number
-        An Armstrong number is an n-digit number that is equal to the sum of the nth powers of its digits.
-For Example: 407 = 4^3 + 0^3 + 7^3 = 64 + 0 + 343 = 407
+An Armstrong number is an n-digit number that is equal to the sum of the nth powers of its digits.
 */
-
 int isArmstrong(int x){
     int len = length(x);
     int original = x;
@@ -24,18 +22,18 @@ int isArmstrong(int x){
         return 1;
     return 0;
 }
+
 /* will return if a number is a palindrome */
 int isPalindrome(int x){
     int len = length(x);
     char charArray[len];
-    int original = x;
     for( int i =0; i < len;  i++){
         charArray[len -i -1] = (char)(x % 10);
         x = x/10;
     }
     int isP = 1;
     for(int j = 0; (j <= len/2) && (isP == 1) ; j++){
-        if(ca[j] != charArray[len - j -1])
+        if(charArray[j] != charArray[len - j -1])
             isP = 0;
     }
     return isP;
