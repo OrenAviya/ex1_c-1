@@ -1,12 +1,45 @@
-#loop main
-main.exe:main.o basicClassification.o advancedClassificationLoop.o
-	gcc main.o basicClassification.o advancedClassificationLoop.o -o main.exe
+all: maindrec maindloop loops mains
 
-main.o: main.c basicClassification.c advancedClassificationLoop.c NumClass.h
-	gcc -c main.c basicClassification.c advancedClassificationLoop.c -o main.o
+clean:
+	rm -rf *.o
 
-basicClassification.o: basicClassification.c NumClass.h
-	gcc -c basicClassification.c -o basicClassification.o
+mains: main.c recursives
+	gcc main.c -L. -lclassrec -o mains
 
-advancedClassificationLoop.o: advancedClassificationLoop.c NumClass.h
-	gcc -c advancedClassificationLoop.c -o advancedClassificationLoop.o
+maindloop: main.c loopd
+	gcc -Wall main.c -L. -lclassloops -o maindloop
+
+maindrec: main.c recursived
+	gcc -Wall main.c -L. -lclassrec -o maindrec
+
+loops:advancedClassificationLoop.o basicClassification.o
+	ar -rc libclassloops.a advancedClassificationLoop.o basicClassification.o
+
+recursives:advancedClassificationRecursion.o basicClassification.o
+	ar -rc libclassrec.a advancedClassificationRecursionPIC.o basicClassification.o
+
+recursived:basicClassificationPIC.o advancedClassificationRecursionPIC.o
+	gcc -shared-Wall, basicClassificationPIC.o advancedClassificationRecursionPIC.o  -o libclassrec.so
+	export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+
+loopd:advancedClassificationLoopPIC.o basicClassificationPIC.o
+	gcc -shared -Wall , advancedClassificationLoopPIC.o basicClassificationPIC.o -o libclassloops.so
+	export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
+
+basicClassification.o:basicClassification.c NumClass.h
+	gcc -Wall -c basicClassification.c -o basicClassification.o
+
+advancedClassificationLoop.o:advancedClassificationLoop.c NumClass.h
+	gcc -Wall -c advancedClassificationLoop.c -o advancedClassificationLoop.o
+
+advancedClassificationRecursion.o:advancedClassificationRecursion.c NumClass.h
+	gcc -Wall -c advancedClassificationRecursion.c -o advancedClassificationRecursion.o
+
+basicClassificationPIC.o:basicClassification.c NumClass.h
+	gcc -c -Wall -Werror -fpic basicClassification.c -o basicClassificationPIC.o
+
+advancedClassificationRecursionPIC.o:advancedClassificationRecursion.c NumClass.h
+	gcc -c -Wall -Werror -fpic advancedClassificationRecursion.c -o advancedClassificationRecursionPIC.o
+
+advancedClassificationLoopPIC.o:advancedClassificationLoop.c NumClass.h
+	gcc -c -Wall -Werror-fpic dvancedClassificationLoop.c -o advancedClassificationLoopPIC.o
