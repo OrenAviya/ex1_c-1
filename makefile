@@ -7,27 +7,34 @@ clean:
 	rm maindloop
 	rm mains
 	rm maindrec
+loopd:libclassloops.so
 
-mains: main.o recursives
+loops:libclassloops.a
+
+recursived:libclassrec.so
+
+recursives:libclassrec.a
+
+mains: main.o libclassrec.a
 	gcc main.o ./libclassrec.a -lm -o mains
 
-maindloop: main.o loopd
+maindloop: main.o libclassloops.so
 	gcc -Wall main.o ./libclassloops.so -lm -o maindloop
 
-maindrec: main.o recursived
+maindrec: main.o libclassrec.so
 	gcc -Wall main.o ./libclassrec.so -lm -o maindrec
 
-loops:advancedClassificationLoop.o basicClassification.o
+libclassloops.a:advancedClassificationLoop.o basicClassification.o
 	ar -rc libclassloops.a advancedClassificationLoop.o basicClassification.o
 
-recursives:advancedClassificationRecursion.o basicClassification.o
+libclassrec.a:advancedClassificationRecursion.o basicClassification.o
 	ar -rc libclassrec.a advancedClassificationRecursionPIC.o basicClassification.o
 
-recursived:basicClassificationPIC.o advancedClassificationRecursionPIC.o
+libclassrec.so:basicClassificationPIC.o advancedClassificationRecursionPIC.o
 	gcc -shared -Wall basicClassificationPIC.o advancedClassificationRecursionPIC.o  -o libclassrec.so
 	export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
-loopd:advancedClassificationLoopPIC.o basicClassificationPIC.o
+libclassloops.so:advancedClassificationLoopPIC.o basicClassificationPIC.o
 	gcc -shared -Wall advancedClassificationLoopPIC.o basicClassificationPIC.o -o libclassloops.so
 	export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
@@ -52,4 +59,4 @@ advancedClassificationLoopPIC.o:advancedClassificationLoop.c NumClass.h
 main.o: main.c NumClass.h
 	gcc -c main.c -o main.o
 
-.PHONEY:all clean
+.PHONEY:all clean loopd loops recursives recursived
