@@ -5,17 +5,19 @@
 int main() {
     int start;
     int end;
-    printf("please enter two integer numbers. \n");
-    scanf("%d %d", &start ,&end);
-    int primes [end - start + 1];
-    int armstrongs [end  - start + 1];
-    int palindromes[end - start + 1 ];
-    int strongs [end - start + 1 ];
+    int flag;
+    char c;
+    scanf("%d%d", &start , &end);
+    int len = end - start + 1;
+    int primes [len];
+    int armstrongs [len];
+    int palindromes[len];
+    int strongs [len];
     int primesInx = 0;
     int armstrongsInx = 0;
     int palindromesInx = 0;
     int strongsInx = 0;
-    for(int i = start; i <= end;)
+    for(int i = start; i <= end;i=i+1)
     {
         if (isStrong(i) == 1) {
             strongs[strongsInx] = i;
@@ -39,17 +41,18 @@ int main() {
     {
         printf(" %d", armstrongs[i]);
     }
-    printf("The Palindromes numbers are:");
+
+    printf("\nThe Palindromes numbers are:");
     for(int i = 0; i <palindromesInx; i = i + 1)
     {
         printf(" %d", palindromes[i]);
     }
-    printf("The Prime numbers are:");
+    printf("\nThe Prime numbers are:");
     for(int i = 0; i < primesInx; i = i + 1)
     {
         printf(" %d", primes[i]);
     }
-    printf("The Strong numbers are:");
+    printf("\nThe Strong numbers are:");
     for(int i = 0; i < strongsInx; i = i + 1)
     {
         printf(" %d", strongs[i]);

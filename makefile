@@ -3,15 +3,19 @@ all: maindrec maindloop loops mains
 clean:
 	rm -rf *.o
 	rm -rf *.so
+	rm -rf *.a
+	rm maindloop
+	rm mains
+	rm maindrec
 
-mains: main.c recursives
-	gcc main.c -L. -lclassrec -o mains
+mains: main.o recursives
+	gcc main.o ./libclassrec.a -lm -o mains
 
-maindloop: main.c loopd
-	gcc -Wall main.c -L. -lclassloops -o maindloop
+maindloop: main.o loopd
+	gcc -Wall main.o ./libclassloops.so -lm -o maindloop
 
-maindrec: main.c recursived
-	gcc -Wall main.c -L. -lclassrec -o maindrec
+maindrec: main.o recursived
+	gcc -Wall main.o ./libclassrec.so -lm -o maindrec
 
 loops:advancedClassificationLoop.o basicClassification.o
 	ar -rc libclassloops.a advancedClassificationLoop.o basicClassification.o
@@ -24,7 +28,7 @@ recursived:basicClassificationPIC.o advancedClassificationRecursionPIC.o
 	export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
 loopd:advancedClassificationLoopPIC.o basicClassificationPIC.o
-	gcc -shared -Wall , advancedClassificationLoopPIC.o basicClassificationPIC.o -o libclassloops.so
+	gcc -shared -Wall advancedClassificationLoopPIC.o basicClassificationPIC.o -o libclassloops.so
 	export LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH
 
 basicClassification.o:basicClassification.c NumClass.h
@@ -44,3 +48,8 @@ advancedClassificationRecursionPIC.o:advancedClassificationRecursion.c NumClass.
 
 advancedClassificationLoopPIC.o:advancedClassificationLoop.c NumClass.h
 	gcc -c -Wall -Werror -fpic advancedClassificationLoop.c -o advancedClassificationLoopPIC.o
+
+main.o: main.c NumClass.h
+	gcc -c main.c -o main.o
+
+.PHONEY:all clean
