@@ -42,7 +42,7 @@ int main() {
         printf(" %d", armstrongs[i]);
     }
 
-    printf("\nThe Palindromes numbers are:");
+    printf("\nThe Palindromes are:");
     for(int i = 0; i <palindromesInx; i = i + 1)
     {
         printf(" %d", palindromes[i]);
