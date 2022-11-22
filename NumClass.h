@@ -35,3 +35,5 @@ int length(int);
  */
 int IsArmstrong(int x, int len);
 #endif //NUMCLASS_NUMCLASS_H
+
+int IsPalindrome(char[] , int start, int end);

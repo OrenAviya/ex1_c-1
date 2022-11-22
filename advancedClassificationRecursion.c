@@ -1,6 +1,7 @@
 #include "NumClass.h"
 #include "math.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /* will return if a number is Armstrong number
 An Armstrong number is an n-digit number that is equal to the sum of the nth powers of its digits.
@@ -20,18 +21,26 @@ int IsArmstrong(int x, int len){
 }
 
 /* will return if a number is a palindrome */
-int isPalindrome(int x){
-    int len = (int) ( floor( log10( abs(x) )+1 ) );
-    int firstDigit = x/( (int)(pow(10,len-1)) );
-    int lastD = x % 10;
-    if(firstDigit != lastD) {
-        return 0;
+int isPalindrome(int x) {
+    int len = (int) (floor(log10(abs(x)) + 1));
+    char charArray[len];
+    for (int i = 0; i < len; i++) {
+        charArray[len - i - 1] = (char) (x % 10);
+        x = x / 10;
     }
-    if(len == 1) {
-        return 1;
-    }
-    x = x / 10;
-    x = x % ( (int)(pow(10,len-1)) );
-    return isPalindrome(x);
-
+    return IsPalindrome(charArray , 0 ,len-1);
 }
+
+
+int IsPalindrome(char x[]  , int start, int end){
+        if(start >= end) {
+            return 1;
+        }
+        if(x[start] != x[end]){
+            return 0;
+        }
+        return IsPalindrome(x, start+1 , end-1);
+
+    }
+
+
