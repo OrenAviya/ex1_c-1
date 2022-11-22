@@ -11,7 +11,7 @@ int isStrong(int num){
     double sum;
     sum=0;
     for (int i = num ; i > 0 ; i = i/10){
-        sum = sum + factorial(num%10);
+        sum = sum + factorial(i%10);
     }
     if (sum == num)
         return 1;

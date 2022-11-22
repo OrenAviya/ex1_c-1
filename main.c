@@ -52,7 +52,7 @@ int main() {
     {
         printf(" %d", primes[i]);
     }
-    printf("\nThe Strong numbers are:\n");
+    printf("\nThe Strong numbers are:");
     for(int i = 0; i < strongsInx; i = i + 1)
     {
         printf(" %d", strongs[i]);
