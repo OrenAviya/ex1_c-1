@@ -57,6 +57,7 @@ int main() {
     {
         printf(" %d", strongs[i]);
     }
+
     return 0;
 }
 
